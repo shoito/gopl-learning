@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-var arr = []string{"abc", "efg"}
+var arr = []string{"abc", "efg", "hij", "xyz", "0123456789"}
 
 func ForLoop() {
 	var s, sep string
