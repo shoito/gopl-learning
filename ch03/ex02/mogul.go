@@ -15,6 +15,7 @@ const (
 	xyscale       = width / 2 / xyrange
 	zscale        = height * 0.4
 	angle         = math.Pi / 6
+	roughness     = 20
 )
 
 var sin30, cos30 = math.Sin(angle), math.Cos(angle)
@@ -40,17 +41,16 @@ func corner(i, j int) (float64, float64) {
 	x := xyrange * (float64(i)/cells - 0.5)
 	y := xyrange * (float64(j)/cells - 0.5)
 
-	z := f(x, y)
+	z := mogul(x, y)
 
 	sx := width/2 + (x-y)*cos30*xyscale
 	sy := height/2 + (x+y)*sin30*xyscale - z*zscale
 	return sx, sy
 }
 
-func f(x, y float64) float64 {
-	r := math.Hypot(x, y)
-	s := math.Sin(r) / r //(1/zero, -1/zero, zero/zero)
-	if math.IsNaN(s) {   // x, y = 0, 0のケースを考慮する修正
+func mogul(x, y float64) float64 {
+	s := math.Sin(x) * math.Cos(y) / roughness
+	if math.IsNaN(s) {
 		return 0.
 	}
 	return s
