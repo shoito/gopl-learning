@@ -5,25 +5,19 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
 	for i := 1; i < len(os.Args); i++ {
 		fmt.Printf("comma: %s\n", comma(os.Args[i]))
-		fmt.Printf("buff:  %s\n", buff(os.Args[i]))
 	}
 }
 
 func comma(s string) string {
-	n := len(s)
-	if n <= 3 {
-		return s
-	}
-	return comma(s[:n-3]) + "," + s[n-3:]
-}
+	p := strings.Split(s, ".")
 
-func buff(s string) string {
-	n := len(s)
+	n := len(p[0])
 	if n <= 3 {
 		return s
 	}
@@ -34,10 +28,15 @@ func buff(s string) string {
 	}
 
 	var b bytes.Buffer
-	b.WriteString(s[:init])
-	for i := init; (i + 3) <= n; i += 3 {
+	b.WriteString(p[0][:init])
+	for i := init; (i + 3) <= len(p[0]); i += 3 {
 		b.WriteString(",")
-		b.WriteString(s[i : i+3])
+		b.WriteString(p[0][i : i+3])
+	}
+
+	if len(p[1]) != 0 {
+		b.WriteString(".")
+		b.WriteString(p[1])
 	}
 	return b.String()
 }
