@@ -5,15 +5,15 @@ package main
 import "fmt"
 
 const (
-	B  = 1024
-	KB = B * 1024
-	MB = KB * 1024
-	GB = MB * 1024
-	TB = GB * 1024
-	PG = TB * 1024
-	EB = PG * 1024
-	ZB = EB * 1024
-	YB = ZB * 1024
+	B  = 1
+	KB = B * 1000
+	MB = KB * 1000
+	GB = MB * 1000
+	TB = GB * 1000
+	PG = TB * 1000
+	EB = PG * 1000
+	ZB = EB * 1000
+	YB = ZB * 1000
 )
 
 func main() {
